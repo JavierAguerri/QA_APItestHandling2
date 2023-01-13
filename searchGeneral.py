@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 from typing import List, Type
 
-import importlib
+import importlib, requests, json
 
-# the resourceGeneral class represents the response of any of films, people, planet, species, starship or vehicle endpoits.
+# the SearchGeneral class represents the response of any of films, people, planet, species, starship or vehicle endpoits.
 # the class has a factory method which initializes a new instance of the class
 # the results field is a bot challenging because ideally:
-# - we want to reuse ResourceGeneral for any of films, people, planet... 
+# - we want to reuse SearchGeneral for any of films, people, planet... 
 #   so we do not know exactly which object type the results array is gonna contain. We type it dynamically.
 #   results is defined by iterating the json_data and using the corresponding class factory method to instantiate the appropriate item
 
@@ -17,7 +17,7 @@ import importlib
 # in order to showcase how scalable and neat my code is!
 
 @dataclass
-class ResourceGeneral:
+class SearchGeneral:
     count: int
     next: str
     previous: str
@@ -34,3 +34,19 @@ class ResourceGeneral:
             previous=json_data["previous"],
             results=results
         )
+        
+    def getNext(self, resource_class: Type):
+        if self.next != None:
+            response = requests.get(self.next)
+            json_response = json.loads(response.text)
+            return self.from_json(json_response, resource_class)
+        else:
+            return None
+        
+    def getPrevious(self, resource_class: Type):
+        if self.previous != None:
+            response = requests.get(self.previous)
+            json_response = json.loads(response.text)
+            return self.from_json(json_response, resource_class)
+        else:
+            return None
