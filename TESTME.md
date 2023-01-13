@@ -5,7 +5,6 @@ Hi! Thank you for the time you spent reviewing this.
 Instructions:
  - Make sure python3 is installed in your machine
  - Navigate to the folder where test.sh is located
- - Run add execution permissions to test.sh
  - Execute this command: ./test.sh
 
 What I did:
