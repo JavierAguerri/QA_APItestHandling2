@@ -45,7 +45,7 @@ class APItesting(unittest.TestCase):
         self.dataFormatAssertion(searchResponse, searchUrl)
         
         # Assert that SearchGeneral class can hold the json data. It should be SearchGeneral
-        # and not the specific endpoint type class because search endpoint returns the "contaner" response. 
+        # and not the specific endpoint type class because search endpoint returns the "container" response. 
         # This step validates that the JSON is well formatted (it contains all the fields)
         json_response = json.loads(searchResponse.text)
         searchInstance = self.searchAssertion(json_response, SearchGeneral, endpointClass)

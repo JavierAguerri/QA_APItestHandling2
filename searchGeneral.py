@@ -5,8 +5,8 @@ import importlib, requests, json
 
 # the SearchGeneral class represents the response of any of films, people, planet, species, starship or vehicle endpoits.
 # the class has a factory method which initializes a new instance of the class
-# the results field is a bot challenging because ideally:
-# - we want to reuse SearchGeneral for any of films, people, planet... 
+# the results field is a bit challenging because ideally:
+#   we want to reuse SearchGeneral for any of films, people, planet... 
 #   so we do not know exactly which object type the results array is gonna contain. We type it dynamically.
 #   results is defined by iterating the json_data and using the corresponding class factory method to instantiate the appropriate item
 
